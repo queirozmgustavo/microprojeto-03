@@ -1,0 +1,35 @@
+syntax = 'proto3';
+
+package pizzaria;
+
+message Pizza {
+    string sabor = 1;
+    float valor = 2;
+}
+
+message Cardapio {
+    repeated Pizza pizzas = 1;
+}
+
+message Posicao {
+    int32 posicao = 1;
+}
+
+message Endereco {
+    string endereco = 1;
+}
+
+message Sacola {
+    repeated Pizza pizzas = 1;
+    string endereco = 2;
+}
+
+message Vazia { }
+
+service ServicoPizzaria {
+    rpc ListarCardapio (Vazia) returns (Cardapio);
+    rpc CadastrarItem (Pizza) returns (Vazia);
+    rpc ExcluirItem (Posicao) returns (Vazia);
+    rpc MontarPedido (Posicao) returns (Vazia);
+    rpc SolicitarEntrega (Endereco) returns (Sacola);
+}
